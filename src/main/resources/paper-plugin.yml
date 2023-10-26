@@ -1,8 +1,6 @@
 name: '${name}'
 main: '${group}.${name}'
 
-loader: '${group}.api.bootstrap.DependencyLoader'
-
 version: '${version}'
 api-version: '${apiVersion}'
 description: '${description}'
