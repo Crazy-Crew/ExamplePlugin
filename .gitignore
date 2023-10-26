@@ -1,0 +1,16 @@
+.idea
+.gradle
+build
+jars
+
+buildSrc/build
+buildSrc/.gradle
+
+common/build
+common/.gradle
+
+paper/build
+paper/.gradle
+
+fabric/build
+fabric/.gradle
