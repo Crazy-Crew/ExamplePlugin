@@ -4,13 +4,11 @@ plugins {
     id("io.papermc.paperweight.userdev") version "1.5.7"
 
     `java-library`
-
-    // kotlin("jvm") version "1.9.10"
 }
 
-rootProject.group = "com.ryderbelserion.template"
-rootProject.description = "A plugin template."
-rootProject.version = "0.2"
+rootProject.group = "com.ryderbelserion.example"
+rootProject.description = "An example plugin for utilizing our api's."
+rootProject.version = "0.1"
 
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
@@ -21,36 +19,14 @@ repositories {
 }
 
 dependencies {
-    // compileOnly(libs.jetbrains.kotlin)
-
-    // https://github.com/ryderbelserion/Cluster
-    // compileOnly(libs.cluster.paper)
-
-    // https://github.com/TriumphTeam/triumph-cmds
-    // compileOnly(libs.triumph.cmds)
-
-    // https://github.com/AuthMe/ConfigMe
-    // compileOnly(libs.config.me)
-
     paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
 }
-
-/*kotlin {
-    jvmToolchain(17)
-}*/
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of("17"))
 }
 
 tasks {
-    /*compileKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
-            javaParameters = true
-        }
-    }*/
-
     val jarsDir = File("$rootDir/jars")
 
     assemble {
