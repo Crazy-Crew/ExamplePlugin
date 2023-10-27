@@ -4,3 +4,10 @@ main: '${group}.${name}'
 version: '${version}'
 api-version: '${apiVersion}'
 description: '${description}'
+
+dependencies:
+  server:
+    CrazyCrates:
+      load: BEFORE
+      required: false
+      join-classpath: true

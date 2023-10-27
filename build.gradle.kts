@@ -7,7 +7,7 @@ plugins {
 }
 
 rootProject.group = "com.ryderbelserion.example"
-rootProject.description = "An example plugin for utilizing our api's."
+rootProject.description = "An example plugin for utilizing our plugin apis."
 rootProject.version = "0.1"
 
 repositories {
@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+    compileOnly("us.crazycrew.crazycrates:api:0.1")
+
     paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
 }
 
