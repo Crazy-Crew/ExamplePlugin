@@ -4,24 +4,27 @@ plugins {
     id("io.papermc.paperweight.userdev") version "1.5.7"
 
     `java-library`
+
+    idea
 }
 
-rootProject.group = "com.ryderbelserion.example"
-rootProject.description = "An example plugin for utilizing our plugin apis."
-rootProject.version = "0.1"
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
+}
 
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
-
-    maven("https://repo.triumphteam.dev/snapshots/")
 
     maven("https://repo.crazycrew.us/releases/")
 }
 
 dependencies {
-    compileOnly("us.crazycrew.crazycrates:api:0.1")
+    compileOnly("us.crazycrew.crazycrates:api:0.4")
 
-    paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
 }
 
 java {
@@ -32,7 +35,11 @@ tasks {
     val jarsDir = File("$rootDir/jars")
 
     assemble {
-        if (jarsDir.exists()) jarsDir.delete() else jarsDir.mkdirs()
+        doFirst {
+            delete(jarsDir)
+
+            jarsDir.mkdirs()
+        }
 
         dependsOn(reobfJar)
     }
@@ -42,16 +49,18 @@ tasks {
     }
 
     processResources {
-        val props = mapOf(
+        val properties = hashMapOf(
             "name" to rootProject.name,
-            "group" to rootProject.group,
             "version" to rootProject.version,
+            "group" to rootProject.group,
             "description" to rootProject.description,
-            "apiVersion" to "1.20",
+            "apiVersion" to providers.gradleProperty("apiVersion").get(),
+            "authors" to providers.gradleProperty("authors").get(),
+            "website" to providers.gradleProperty("website").get()
         )
 
-        filesMatching("paper-plugin.yml") {
-            expand(props)
+        filesMatching("plugin.yml") {
+            expand(properties)
         }
     }
 }

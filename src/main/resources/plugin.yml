@@ -1,13 +1,11 @@
 name: '${name}'
 main: '${group}.${name}'
 
+authors: '${authors}'
+
 version: '${version}'
 api-version: '${apiVersion}'
 description: '${description}'
+website: '${website}'
 
-dependencies:
-  server:
-    CrazyCrates:
-      load: BEFORE
-      required: false
-      join-classpath: true
+depend: [CrazyCrates]
