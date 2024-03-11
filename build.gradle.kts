@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
 
@@ -15,10 +17,16 @@ idea {
     }
 }
 
+base {
+    archivesName.set(rootProject.name)
+}
+
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
 
-    maven("https://repo.crazycrew.us/releases/")
+    //maven("https://repo.crazycrew.us/releases/")
+
+    mavenLocal()
 }
 
 dependencies {
@@ -42,10 +50,21 @@ tasks {
         }
 
         dependsOn(reobfJar)
-    }
 
-    reobfJar {
-        outputJar.set(file("$jarsDir/${rootProject.name}-${rootProject.version}.jar"))
+        doLast {
+            runCatching {
+                val file = File("$jarsDir/${project.name.uppercaseFirstChar().lowercase()}")
+
+                file.mkdirs()
+
+                copy {
+                    from(rootProject.layout.buildDirectory.file("libs/${rootProject.name}-${project.version}.jar"))
+                    into(file)
+                }
+            }.onSuccess {
+                delete(rootProject.layout.buildDirectory.get())
+            }
+        }
     }
 
     processResources {
@@ -55,8 +74,7 @@ tasks {
             "group" to rootProject.group,
             "description" to rootProject.description,
             "apiVersion" to providers.gradleProperty("apiVersion").get(),
-            "authors" to providers.gradleProperty("authors").get(),
-            "website" to providers.gradleProperty("website").get()
+            "authors" to providers.gradleProperty("authors").get()
         )
 
         filesMatching("plugin.yml") {
