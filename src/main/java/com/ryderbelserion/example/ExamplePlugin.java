@@ -7,12 +7,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import us.crazycrew.crazycrates.CrazyCrates;
-import us.crazycrew.crazycrates.CrazyCratesProvider;
-import us.crazycrew.crazycrates.api.CrazyCratesService;
-import us.crazycrew.crazycrates.api.ICrazyCrates;
+import us.crazycrew.crazycrates.CratesProvider;
 import us.crazycrew.crazycrates.api.enums.types.KeyType;
 import us.crazycrew.crazycrates.api.users.UserManager;
+import us.crazycrew.crazycrates.platform.Server;
 import java.util.UUID;
 
 public class ExamplePlugin extends JavaPlugin implements Listener {
@@ -44,7 +42,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
         UUID uuid = player.getUniqueId();
 
-        @NotNull CrazyCrates service = CrazyCratesProvider.get();
+        @NotNull Server service = CratesProvider.get();
 
         UserManager userManager = service.getUserManager();
 
