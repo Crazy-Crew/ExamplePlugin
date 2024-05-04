@@ -46,9 +46,9 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
         UserManager userManager = service.getUserManager();
 
-        userManager.addKeys(5, uuid, "CrateExample", KeyType.virtual_key);
-        userManager.addKeys(10, uuid, "QuadCrateExample", KeyType.physical_key);
-        userManager.addKeys(1, uuid, "Fuckyou", KeyType.virtual_key);
+        userManager.addKeys(uuid, "CrateExample", KeyType.virtual_key, 5);
+        userManager.addKeys(uuid, "QuadCrateExample", KeyType.physical_key, 10);
+        userManager.addKeys(uuid, "Fuckyou", KeyType.virtual_key, 1);
         userManager.addOpenedCrate(uuid, "CrateExample");
     }
 
