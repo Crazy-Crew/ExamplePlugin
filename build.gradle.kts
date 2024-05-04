@@ -3,7 +3,7 @@ import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
 
-    id("io.papermc.paperweight.userdev") version "1.5.15"
+    id("io.papermc.paperweight.userdev") version "1.6.2"
 
     `java-library`
 
@@ -22,15 +22,15 @@ base {
 }
 
 repositories {
-    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public")
 
-    maven("https://repo.crazycrew.us/snapshots/")
+    maven("https://repo.crazycrew.us/releases")
 
     mavenLocal()
 }
 
 dependencies {
-    compileOnly("us.crazycrew.crazycrates:api:1.0-snapshot")
+    compileOnly("us.crazycrew.crazycrates:api:0.4")
 
     paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
 }
