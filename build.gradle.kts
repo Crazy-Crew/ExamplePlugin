@@ -1,7 +1,7 @@
 plugins {
     id("io.github.goooler.shadow") version "8.1.7"
 
-    id("io.papermc.paperweight.userdev") version "1.6.2"
+    id("io.papermc.paperweight.userdev") version "1.7.0"
 
     `java-library`
 
@@ -16,17 +16,15 @@ idea {
 }
 
 repositories {
-    maven("https://repo.papermc.io/repository/maven-public")
+    maven("https://repo.papermc.io/repository/maven-public/")
 
-    maven("https://repo.crazycrew.us/releases")
-
-    mavenLocal()
+    maven("https://repo.crazycrew.us/releases/")
 }
 
 dependencies {
-    compileOnly("us.crazycrew.crazycrates:api:0.5")
-
     paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
+
+    compileOnly("us.crazycrew.crazycrates:api:0.5")
 }
 
 java {
