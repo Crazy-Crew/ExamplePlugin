@@ -1,9 +1,7 @@
-import org.gradle.kotlin.dsl.support.uppercaseFirstChar
-
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.github.goooler.shadow") version "8.1.7"
 
-    id("io.papermc.paperweight.userdev") version "1.5.15"
+    id("io.papermc.paperweight.userdev") version "1.7.0"
 
     `java-library`
 
@@ -17,54 +15,37 @@ idea {
     }
 }
 
-base {
-    archivesName.set(rootProject.name)
-}
-
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
 
-    maven("https://repo.crazycrew.us/snapshots/")
-
-    mavenLocal()
+    maven("https://repo.crazycrew.us/releases/")
 }
 
 dependencies {
-    compileOnly("us.crazycrew.crazycrates:api:1.0-snapshot")
+    paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
 
-    paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+    compileOnly("us.crazycrew.crazycrates:api:0.5")
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of("17"))
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+paperweight {
+    reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 }
 
 tasks {
-    val jarsDir = File("$rootDir/jars")
+    compileJava {
+        options.encoding = Charsets.UTF_8.name()
+        options.release.set(21)
+    }
 
-    assemble {
-        doFirst {
-            delete(jarsDir)
-
-            jarsDir.mkdirs()
-        }
-
-        dependsOn(reobfJar)
-
-        doLast {
-            runCatching {
-                val file = File("$jarsDir/${project.name.uppercaseFirstChar().lowercase()}")
-
-                file.mkdirs()
-
-                copy {
-                    from(rootProject.layout.buildDirectory.file("libs/${rootProject.name}-${project.version}.jar"))
-                    into(file)
-                }
-            }.onSuccess {
-                delete(rootProject.layout.buildDirectory.get())
-            }
-        }
+    shadowJar {
+        archiveBaseName.set(rootProject.name)
+        archiveClassifier.set("")
     }
 
     processResources {
