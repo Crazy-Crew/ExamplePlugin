@@ -19,6 +19,8 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
         return getServer().getPluginManager().isPluginEnabled(pluginName);
     }
 
+    private final @NotNull IServer service = CratesProvider.get();
+
     @Override
     public void onEnable() {
         super.onEnable();
@@ -45,7 +47,11 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
         UUID uuid = player.getUniqueId();
 
-        @NotNull IServer service = CratesProvider.get();
+        // Check if they are in a blacklisted world and if so return.
+        if (this.service.getConfigOptions().getDisabledWorlds().contains(player.getWorld().getName())) {
+            player.sendRichMessage("<gray>[</gray><light_blue>Crates</light_blue><gray>]</gray> <red>You cannot get keys in</red> <gold>" + player.getWorld().getName() + "</gold>");
+            return;
+        }
 
         UserManager userManager = service.getUserManager();
 
