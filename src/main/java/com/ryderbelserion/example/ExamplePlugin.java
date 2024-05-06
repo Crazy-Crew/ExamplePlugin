@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import us.crazycrew.crazycrates.CratesProvider;
 import us.crazycrew.crazycrates.api.enums.types.KeyType;
 import us.crazycrew.crazycrates.api.users.UserManager;
-import us.crazycrew.crazycrates.platform.Server;
+import us.crazycrew.crazycrates.platform.IServer;
 import java.util.UUID;
 
 public class ExamplePlugin extends JavaPlugin implements Listener {
@@ -42,7 +42,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
         UUID uuid = player.getUniqueId();
 
-        @NotNull Server service = CratesProvider.get();
+        @NotNull IServer service = CratesProvider.get();
 
         UserManager userManager = service.getUserManager();
 
