@@ -49,7 +49,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
         UUID uuid = player.getUniqueId();
 
         // Check if they are in a blacklisted world and if so return.
-        if (this.service.getConfigOptions().getDisabledWorlds().contains(player.getWorld().getName())) {
+        if (this.service.getSettings().getDisabledWorlds().contains(player.getWorld().getName())) {
             player.sendRichMessage("<gray>[</gray><light_blue>Crates</light_blue><gray>]</gray> <red>You cannot get keys in</red> <gold>" + player.getWorld().getName() + "</gold>");
             return;
         }
