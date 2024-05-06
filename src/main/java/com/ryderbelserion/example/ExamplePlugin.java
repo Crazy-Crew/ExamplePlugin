@@ -6,7 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 import us.crazycrew.crazycrates.CratesProvider;
 import us.crazycrew.crazycrates.api.enums.types.KeyType;
 import us.crazycrew.crazycrates.api.users.UserManager;
@@ -19,7 +18,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
         return getServer().getPluginManager().isPluginEnabled(pluginName);
     }
 
-    private final @NotNull IServer service = CratesProvider.get();
+    private IServer service;
 
     @Override
     public void onEnable() {
@@ -29,6 +28,8 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
             Plugin instance = getServer().getPluginManager().getPlugin("CrazyCrates");
 
             if (instance != null) {
+                this.service = CratesProvider.get();
+
                 getLogger().warning("The plugin: " + instance.getName() + " is enabled.");
 
                 getServer().getPluginManager().registerEvents(this, this);
