@@ -53,7 +53,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
             return;
         }
 
-        UserManager userManager = service.getUserManager();
+        UserManager userManager = this.service.getUserManager();
 
         userManager.addKeys(uuid, "CrateExample", KeyType.virtual_key, 5);
         userManager.addKeys(uuid, "QuadCrateExample", KeyType.physical_key, 10);
