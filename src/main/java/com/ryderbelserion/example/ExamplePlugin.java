@@ -33,6 +33,9 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
             }
         } else {
             getLogger().warning("Could not find CrazyCrates!");
+
+            // only disable the plugin if you absolutely require CrazyCrates
+            //getServer().getPluginManager().disablePlugin(this);
         }
     }
 
